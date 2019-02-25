@@ -20,6 +20,7 @@ export default class List extends Component{
                     <ListItem
                             {...items}
                             put={put}
+                            id={id}
                             />
                 </li>
             )

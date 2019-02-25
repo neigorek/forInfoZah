@@ -22,6 +22,11 @@ export default class App extends Component {
 
     }
 
+    componentDidMount() {
+
+
+    }
+
     constructor(props){
 
         super(props);
@@ -63,7 +68,7 @@ export default class App extends Component {
     }
 
 
-    search(items, term) {
+     search(items, term) {
 
         if (term.length === 0) {
 
@@ -71,20 +76,18 @@ export default class App extends Component {
 
         }
 
-        return items.filter((item)=>{
+        else {
+
+              this.service.getFiltered(term).then((data)=>{
+
+                  this.setState(()=>({persons:data}))
+
+              })
 
 
-                return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
+            return this.state.persons
 
-                    item.email.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-
-                    item.funds.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-
-                    item.city.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-
-                    item.phone.toLowerCase().indexOf(term.toLowerCase()) > -1
-            });
-
+        }
 
     }
 
@@ -93,7 +96,7 @@ export default class App extends Component {
 
         const {persons, term, dPerPage, currentPage} = this.state;
 
-        const VisibleItems = this.search(persons, term);
+        const VisibleItems = this.search(persons, term); //todo refactor
 
         console.log(VisibleItems)
 

@@ -20,6 +20,25 @@ export default class Service {
 
     }
 
+    async getFiltered(str){
+
+
+            const res = await axios.get(`${this._apiBase}?name=${str}`);
+            //
+            const res1 = await axios.get(`${this._apiBase}?city=${str}`);
+
+            const res2 = await axios.get(`${this._apiBase}?funds=${str}`);
+
+            const res3 = await axios.get(`${this._apiBase}?phone=${str}`);
+
+
+        console.log(res, 'res')
+
+            return [...res.data.data, ...res1.data.data, ...res2.data.data, ...res3.data.data]
+
+
+    }
+
 
 }
 
