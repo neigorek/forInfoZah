@@ -20,12 +20,11 @@ export default class App extends Component {
 
         dPerPage: 10,
 
-    }
-
-    componentDidMount() {
-
+        visib : []
 
     }
+
+
 
     constructor(props){
 
@@ -36,6 +35,7 @@ export default class App extends Component {
         this.handleClick = this.handleClick.bind(this)
 
     }
+
 
     handleClick = (event) => {
 
@@ -48,8 +48,10 @@ export default class App extends Component {
     updateMe(){
 
             this.service.getResourse().then(({data})=>{
+                console.log(data.data, 'dd')
                 this.setState(()=>({persons: data.data}))
             })
+
     }
 
      updateUser = async(data) => {
@@ -62,8 +64,31 @@ export default class App extends Component {
 
     onSearchChange = (term) =>{
 
+
+
         this.setState({term});
 
+        if (term==='100'||term<100){
+
+            this.service.getFiltered(term).then(({data})=>{
+                console.log(data.data, 'dd')
+                this.setState(()=>({persons: data.data}))
+            })
+
+        }
+        else {
+
+            this.service.getFiltered(term).then((data)=>{
+
+                console.log(data, 'else')
+
+                this.setState(()=>({persons:data}))
+
+            })
+
+            console.log(this.state.persons, 'pppp')
+
+        }
 
     }
 
@@ -72,7 +97,7 @@ export default class App extends Component {
 
         if (term.length === 0) {
 
-            return items;
+             return items;
 
         }
 
@@ -80,10 +105,13 @@ export default class App extends Component {
 
               this.service.getFiltered(term).then((data)=>{
 
+                  console.log(data, 'else')
+
                   this.setState(()=>({persons:data}))
 
               })
 
+            console.log(this.state.persons, 'persons')
 
             return this.state.persons
 
@@ -93,12 +121,10 @@ export default class App extends Component {
 
     render(){
 
-
+        console.log(this.state.persons, 'log')
         const {persons, term, dPerPage, currentPage} = this.state;
 
-        const VisibleItems = this.search(persons, term); //todo refactor
-
-        console.log(VisibleItems)
+        const VisibleItems = persons; //todo refactor
 
         const indexOfLastTodo = currentPage * dPerPage;
 
@@ -111,6 +137,8 @@ export default class App extends Component {
             return( <li key={index}>{todo}</li>)
 
         });
+
+        console.log(VisibleItems, 'res')
 
 
         const pageNumbers = [];

@@ -8,6 +8,7 @@ export default class List extends Component{
 
     render() {
 
+
         const {persons, put} = this.props;
 
         const elems = persons.map((item)=>{
