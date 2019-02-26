@@ -27,20 +27,9 @@ export default class Service {
 
 
         let res ;
-        //
-        //
-        // const res = await axios.get(`${this._apiBase}?name=${str}`);
-        // //
-        // const res1 = await axios.get(`${this._apiBase}?city=${str}`);
-        //
-        // const res2 = await axios.get(`${this._apiBase}?funds=${str}`);
-        //
-        // const res3 = await axios.get(`${this._apiBase}?phone=${str}`);
 
-        // const  { data = {}} = res
-        // const { data = []} = data
         
-        if (str == '100' || str < 100){
+        if (str == '100' || str < -100){
 
             if (str==='100'){
 

@@ -68,7 +68,7 @@ export default class App extends Component {
 
         this.setState({term});
 
-        if (term==='100'||term<100){
+        if (term==='100'||term<-100){
 
             this.service.getFiltered(term).then(({data})=>{
                 console.log(data.data, 'dd')
@@ -93,36 +93,12 @@ export default class App extends Component {
     }
 
 
-     search(items, term) {
 
-        if (term.length === 0) {
-
-             return items;
-
-        }
-
-        else {
-
-              this.service.getFiltered(term).then((data)=>{
-
-                  console.log(data, 'else')
-
-                  this.setState(()=>({persons:data}))
-
-              })
-
-            console.log(this.state.persons, 'persons')
-
-            return this.state.persons
-
-        }
-
-    }
 
     render(){
 
         console.log(this.state.persons, 'log')
-        const {persons, term, dPerPage, currentPage} = this.state;
+        const {persons, dPerPage, currentPage} = this.state;
 
         const VisibleItems = persons; //todo refactor
 
@@ -177,7 +153,7 @@ export default class App extends Component {
 
                 </div>
                 <div>
-                    <ul className={'pagination pagination-lg'}>
+                    <ul className={'pagination pagination-sm'}>
                         {renderPageNumbers}
                     </ul>
                 </div>
